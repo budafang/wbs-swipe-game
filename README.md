@@ -23,3 +23,13 @@
 ## 目前進度
 
 第一版遊戲已完成，題庫包含課程提供的 8 個例子，以及 2 個展覽情境題。下一步可依課堂試玩結果調整題目難度與時間。
+
+
+## Vercel 部署
+
+- Production 網址：https://wbs-swipe-game.vercel.app/
+- Vercel 專案：wbs-swipe-game（連結 GitHub udafang/wbs-swipe-game）
+- Production branch：main；推送到 main 會自動觸發部署。
+- Vercel 團隊方案：Hobby。
+- 2026-10-08 初始部署狀態：READY。
+
