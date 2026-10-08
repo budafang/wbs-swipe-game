@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#f4f7fb">
+    <meta name="description" content="30 秒、10 題，練習分辨 WBS 交付成果與 Activity 工作。">
+    <title>WBS 還是 Activity？｜限時分類遊戲</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="game.js" defer></script>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="WBS 還是 Activity？首頁">
+          <span class="brand-mark" aria-hidden="true">W</span>
+          <span>專案管理・快手挑戰</span>
+        </a>
+        <span class="top-tag">10 題 · 30 秒</span>
+      </header>
+
+      <section class="screen intro-screen" id="intro-screen" aria-labelledby="game-title">
+        <div class="intro-copy">
+          <p class="eyebrow"><span class="live-dot"></span> READY？手指準備</p>
+          <h1 id="game-title">WBS <span>還是</span><br>Activity？</h1>
+          <p class="lead">看清楚卡片，在時間內把它送到正確的一邊！</p>
+          <div class="howto" aria-label="遊戲操作說明">
+            <div class="howto-item"><span class="direction direction-left" aria-hidden="true">←</span><span><strong>左滑</strong><small>交付成果・WBS</small></span></div>
+            <div class="howto-divider" aria-hidden="true"></div>
+            <div class="howto-item"><span class="direction direction-right" aria-hidden="true">→</span><span><strong>右滑</strong><small>執行工作・Activity</small></span></div>
+          </div>
+          <button class="primary-button start-button" id="start-button" type="button">開始挑戰 <span aria-hidden="true">↗</span></button>
+          <p class="key-hint">也可以用鍵盤 ← / → 作答</p>
+        </div>
+        <div class="demo-card-wrap" aria-hidden="true">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="demo-card"><span class="demo-label">這是成果嗎？</span><strong>展覽<br>主視覺</strong><span class="demo-hint">滑向左邊試試</span><span class="demo-arrow">↙</span></div>
+          <span class="float-chip chip-one">交付成果</span><span class="float-chip chip-two">一個決定，就出手！</span>
+        </div>
+      </section>
+
+      <section class="screen game-screen" id="game-screen" aria-label="分類遊戲" hidden>
+        <div class="game-head">
+          <div class="progress-block"><div class="progress-meta"><span id="question-count">第 1 / 10 題</span><span id="score-label">0 分</span></div><div class="progress-track"><span id="progress-fill"></span></div></div>
+          <div class="timer" id="timer" role="timer" aria-label="剩餘時間 30 秒"><svg viewBox="0 0 44 44" aria-hidden="true"><circle class="timer-track" cx="22" cy="22" r="18"></circle><circle class="timer-ring" id="timer-ring" cx="22" cy="22" r="18"></circle></svg><span id="time-left">30</span></div>
+        </div>
+        <div class="game-prompt"><p class="eyebrow">展覽專案情境</p><h2>這張卡片屬於……</h2></div>
+        <div class="play-area" id="play-area">
+          <div class="side-hint side-left" aria-hidden="true"><span>←</span><small>WBS</small></div>
+          <article class="question-card" id="question-card" aria-live="polite" aria-atomic="true" tabindex="0">
+            <span class="card-kicker" id="card-kicker">展覽交付項目</span>
+            <div class="card-text" id="card-text">展覽主視覺</div>
+            <span class="card-swipe-hint">左右滑動卡片</span>
+            <div class="card-feedback" id="card-feedback" aria-hidden="true"></div>
+          </article>
+          <div class="side-hint side-right" aria-hidden="true"><span>→</span><small>Activity</small></div>
+        </div>
+        <div class="answer-buttons"><button class="answer-button wbs-button" id="wbs-button" type="button"><span class="button-arrow" aria-hidden="true">←</span><span><strong>WBS</strong><small>交付成果</small></span></button><button class="answer-button activity-button" id="activity-button" type="button"><span><strong>Activity</strong><small>執行工作</small></span><span class="button-arrow" aria-hidden="true">→</span></button></div>
+        <p class="streak-line" id="streak-line" aria-live="polite">連擊 <strong id="streak-count">0</strong></p>
+      </section>
+
+      <section class="screen result-screen" id="result-screen" aria-labelledby="result-title" hidden>
+        <div class="result-top"><span class="result-icon" id="result-icon" aria-hidden="true">✦</span><p class="eyebrow">挑戰完成</p><h2 id="result-title">漂亮出手！</h2><p class="result-copy" id="result-copy">成果和工作，現在分得清楚了！</p></div>
+        <div class="score-card"><div><span class="score-caption">本局得分</span><strong class="final-score" id="final-score">0</strong><span class="score-out-of">分</span></div><div class="score-divider"></div><div class="score-stat"><strong id="correct-count">0 / 10</strong><span>答對題數</span></div><div class="score-stat"><strong id="best-streak">0</strong><span>最高連擊</span></div></div>
+        <div class="review-heading"><h3>逐題回顧</h3><span id="review-summary">答對 0 題</span></div>
+        <ol class="review-list" id="review-list"></ol>
+        <button class="primary-button replay-button" id="replay-button" type="button">再玩一次 <span aria-hidden="true">↻</span></button>
+        <p class="takeaway">記住：WBS 描述<strong>要交付什麼</strong>；Activity 描述<strong>要做哪些工作</strong>。</p>
+      </section>
+      <footer class="page-footer"><span>WBS 是交付成果的分解；Activity 是完成工作的行動</span><span>PROJECT MANAGEMENT · MINI GAME</span></footer>
+    </main>
+    <div class="sr-only" id="announcement" aria-live="assertive" aria-atomic="true"></div>
+  </body>
+</html>
